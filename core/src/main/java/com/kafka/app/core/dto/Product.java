@@ -15,4 +15,10 @@ public class Product {
     private String name;
     private BigDecimal price;
     private Integer quantity;
+
+    public Product(UUID id, Integer quantity)
+    {
+        this.id = id;
+        this.quantity = quantity;
+    }
 }
