@@ -9,8 +9,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
 @Configuration
-public class KafkaConfig {
-
+public class ProductsKafkaConfig
+{
     @Value("${products.events.topic.name}")
     private String productsEventsTopicName;
 

@@ -33,10 +33,10 @@ spring:
     ccp:
       url: http://localhost:8084
 
-  payments:
-    commands:
-      topic:
-        name: payments-commands
-    events:
-      topic:
-        name: payments-events
+payments:
+  commands:
+    topic:
+      name: payments-commands
+  events:
+    topic:
+      name: payments-events

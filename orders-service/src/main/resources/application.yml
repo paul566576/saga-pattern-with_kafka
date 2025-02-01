@@ -37,16 +37,17 @@ spring:
     console:
       enabled: true
 
-  events:
-    topic:
-      name:
-        orders: orders-events
-        products: products-events
-        payments: payments-events
 
-  commands:
-    topic:
-      name:
-        products: products-commands
-        payments: payments-commands
-        orders: orders-commands
+events:
+  topic:
+    name:
+      orders: orders-events
+      products: products-events
+      payments: payments-events
+
+commands:
+  topic:
+    name:
+      products: products-commands
+      payments: payments-commands
+      orders: orders-commands

@@ -9,16 +9,16 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
 
-@Configuration
+@Configuration("ordersKafkaConfig")
 public class KafkaConfig
 {
-	@Value("${orders.events.topic.name}")
+	@Value("${events.topic.name.orders}")
 	private String ordersEventsTopicName;
-	@Value("${products.commands.topic.name}")
+	@Value("${commands.topic.name.products}")
 	private String productsCommandsTopicName;
-	@Value("${payments.commands.topic.name}")
+	@Value("${commands.topic.name.payments}")
 	private String paymentsCommandsTopicName;
-	@Value("${orders.commands.topic.name}")
+	@Value("${commands.topic.name.orders}")
 	private String ordersCommandsTopicName;
 
 	private final static Integer TOPIC_REPLICATION_FACTOR = 3;

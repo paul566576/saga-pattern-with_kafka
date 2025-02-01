@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@KafkaListener(topics = { "${orders.events.topic.name}",
-		"${products.events.topic.name}",
-		"${payments.events.topic.name}" })
+@KafkaListener(topics = { "${events.topic.name.orders}",
+		"${events.topic.name.products}",
+		"${events.topic.name.payments}" })
 @RequiredArgsConstructor
 public class OrderSaga
 {

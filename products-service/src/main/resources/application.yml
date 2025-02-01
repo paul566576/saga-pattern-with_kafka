@@ -29,10 +29,10 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
-  products:
-    commands:
-      topic:
-        name: products-commands
-    events:
-      topic:
-        name: products-events
+products:
+  commands:
+    topic:
+      name: products-commands
+  events:
+    topic:
+      name: products-events

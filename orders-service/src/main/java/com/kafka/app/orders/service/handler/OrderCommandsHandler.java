@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-@KafkaListener(topics = { "${orders.commands.topic.name}" })
+@KafkaListener(topics = { "${commands.topic.name.orders}" })
 @RequiredArgsConstructor
 public class OrderCommandsHandler
 {
