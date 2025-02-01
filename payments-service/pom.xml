@@ -12,7 +12,6 @@
         <groupId>com.kafka.app</groupId>
         <artifactId>saga-pattern-spring-boot-demo</artifactId>
         <version>1.0.0</version>
-
     </parent>
 
     <dependencies>
