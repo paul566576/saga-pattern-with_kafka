@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+
+  kafka:
+    bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      properties:
+        delivery.timeout.ms: 120000
+        linger.ms: 0
+        request.timeout.ms: 30000
+        max.in.flight.requests.per.connection: 5
+        enable.idempotence: true
+    consumer:
+      group-id: orders-ms
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.appsdeveloperblog.core.*
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: admin
+    password: nimda
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+
+  events:
+    topic:
+      name:
+        orders: orders-events
+        products: products-events
+        payments: payments-events
+
+  commands:
+    topic:
+      name:
+        products: products-commands
+        payments: payments-commands
+        orders: orders-commands
