@@ -4,8 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.kafka.app</groupId>
+        <artifactId>saga-pattern-spring-boot-demo</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.kafka.app</groupId>
     <artifactId>core</artifactId>
     <version>1.0.0</version>
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -18,12 +28,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <parent>
-        <groupId>com.kafka.app</groupId>
-        <artifactId>saga-pattern-spring-boot-demo</artifactId>
-        <version>1.0.0</version>
-    </parent>
 </project>

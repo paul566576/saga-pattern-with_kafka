@@ -2,25 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.kafka.app</groupId>
     <artifactId>saga-pattern-spring-boot-demo</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
+
     <name>Saga Orchestration Pattern Demo</name>
     <description>Saga Orchestration Pattern Spring Boot Demo</description>
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-    <version>${revision}</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <modules>
@@ -31,10 +26,12 @@
         <module>products-service</module>
     </modules>
 
-
     <properties>
         <revision>1.0.0</revision>
         <java.version>17</java.version>
+        <jib.version>3.4.2</jib.version>
+        <image.tag>1.0</image.tag>
+        <testcontainers.version>1.19.0</testcontainers.version>
     </properties>
 
     <dependencyManagement>
@@ -49,6 +46,17 @@
                 <artifactId>junit-jupiter</artifactId>
                 <version>${testcontainers.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.30</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.kafka.app</groupId>
+                <artifactId>core</artifactId>
+                <version>1.0.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
