@@ -29,9 +29,9 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
-  remote:
-    ccp:
-      url: http://localhost:8084
+remote:
+  ccp:
+    url: http://localhost:8084
 
 payments:
   commands:

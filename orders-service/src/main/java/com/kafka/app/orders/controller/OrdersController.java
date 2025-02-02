@@ -7,6 +7,7 @@ import com.kafka.app.orders.dto.OrderHistoryResponse;
 import com.kafka.app.orders.service.OrderHistoryService;
 import com.kafka.app.orders.service.OrderService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +19,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orders")
+@RequiredArgsConstructor
 public class OrdersController {
     private final OrderService orderService;
     private final OrderHistoryService orderHistoryService;
-
-
-    public OrdersController(OrderService orderService, OrderHistoryService orderHistoryService) {
-        this.orderService = orderService;
-        this.orderHistoryService = orderHistoryService;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
