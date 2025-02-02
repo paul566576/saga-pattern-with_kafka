@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "6430bb47-df20-4ca7-b983-329be91ed2a0",
+		"name": "kafka-example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15016816",
+		"_collection_link": "https://red-meadow-634876.postman.co/workspace/SpringSecurity~c4584cb3-e853-472d-9c69-687e91bc1ff9/collection/15016816-6430bb47-df20-4ca7-b983-329be91ed2a0?action=share&source=collection_link&creator=15016816"
+	},
+	"item": [
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "Create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"product1\",\n    \"price\": 10.10,\n    \"quantity\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "Place order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerId\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"productId\": \"3d9d960c-6cb3-4baf-b75d-ed3e4962a9d4\",\n  \"productQuantity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "˜Get Order history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/orders/d0f5d032-7e1d-46dc-a952-770dea325e44/history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"d0f5d032-7e1d-46dc-a952-770dea325e44",
+								"history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CC processor service",
+			"item": [
+				{
+					"name": "New Folder",
+					"item": [
+						{
+							"name": "CC processed",
+							"request": {
+								"method": "POST",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
