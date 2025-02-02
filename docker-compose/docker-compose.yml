@@ -54,12 +54,6 @@ services:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: "org.h2.Driver"
       SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.H2Dialect"
       SPRING_H2_CONSOLE_ENABLED: "true"
-      EVENTS_TOPIC_ORDERS: "orders-events"
-      EVENTS_TOPIC_PRODUCTS: "products-events"
-      EVENTS_TOPIC_PAYMENTS: "payments-events"
-      COMMANDS_TOPIC_PRODUCTS: "products-commands"
-      COMMANDS_TOPIC_PAYMENTS: "payments-commands"
-      COMMANDS_TOPIC_ORDERS: "orders-commands"
     ports:
       - "8080:8080"
     extends:
