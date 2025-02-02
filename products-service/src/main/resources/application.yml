@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: ProductsService
   jackson:
     deserialization:
       fail-on-unknown-properties: true
@@ -10,6 +12,7 @@ spring:
     admin:
       auto-create: false
     bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
+#    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -24,7 +27,7 @@ spring:
     consumer:
       group-id: products-ms
       properties:
-        spring.json.trusted.packages: com.appsdeveloperblog.core.*
+        spring.json.trusted.packages: com.kafka.app.core.*
         allow.auto.create.topics: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

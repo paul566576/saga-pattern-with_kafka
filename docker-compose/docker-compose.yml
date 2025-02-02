@@ -1,0 +1,141 @@
+version: "3.8"
+
+services:
+  products:
+    image: pavelboldienkov/product-service:1.0
+    container_name: products-ms
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    environment:
+      SPRING_APPLICATION_NAME: "ProductsMicroservice"
+      SERVER_PORT: "8081"
+      SPRING_KAFKA_CONSUMER_GROUP_ID: "products-ms"
+    ports:
+      - "8081:8081"
+    extends:
+      file: common-config.yml
+      service: kafka-dependencies-config-service
+
+  payments:
+    image: pavelboldienkov/payments-service:1.0
+    container_name: payments-ms
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    environment:
+      SPRING_APPLICATION_NAME: "PaymentsMicroservice"
+      SERVER_PORT: "8082"
+      SPRING_KAFKA_CONSUMER_GROUP_ID: "payments-ms"
+      REMOTE_CCP_URL: "http://ccp:8084"
+    ports:
+      - "8082:8082"
+    extends:
+      file: common-config.yml
+      service: kafka-dependencies-config-service
+
+  orders:
+    image: pavelboldienkov/orders-service:1.0
+    container_name: orders-ms
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    environment:
+      SPRING_APPLICATION_NAME: "OrdersMicroservice"
+      SERVER_PORT: "8080"
+      SPRING_KAFKA_CONSUMER_GROUP_ID: "orders-ms"
+      # DB connectivity
+      SPRING_DATASOURCE_URL: "jdbc:h2:mem:testdb"
+      SPRING_DATASOURCE_USERNAME: "admin"
+      SPRING_DATASOURCE_PASSWORD: "nimda"
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: "org.h2.Driver"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.H2Dialect"
+      SPRING_H2_CONSOLE_ENABLED: "true"
+    ports:
+      - "8080:8080"
+    extends:
+      file: common-config.yml
+      service: kafka-dependencies-config-service
+
+  cc-service:
+    image: pavelboldienkov/credit-card-processor-service:1.0
+    container_name: credit-card-processor-service
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_APPLICATION_NAME: "CcProcessMicroservice"
+      SERVER_PORT: "8084"
+      SPRING_JACKSON_DESERIALIZATION_FAIL_ON_UNKNOWN_PROPERTIES: "true"
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    restart: always
+    ports:
+      - "8090:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: "r4zt_wrqTRuT7W2NJsB_GA"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
+      DYNAMIC_CONFIG_ENABLED: "true"
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
+  kafka-1:
+    image: "bitnami/kafka:3.3.2"
+    container_name: kafka-1
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      # Listeners
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9192,CONTROLLER://:9094,EXTERNAL://:9091
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1:9192,EXTERNAL://:9091
+    ports:
+      - "9091:9091"
+    volumes:
+      - ../kafka-volumes/server-1:/bitnami/kafka
+    extends:
+      file: common-config.yml
+      service: kafka-config-service
+
+  kafka-2:
+    image: "bitnami/kafka:3.3.2"
+    container_name: kafka-2
+    environment:
+      - KAFKA_CFG_NODE_ID=2
+      # Listeners
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9192,CONTROLLER://:9094,EXTERNAL://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2:9192,EXTERNAL://:9092
+    ports:
+      - "9092:9092"
+    volumes:
+      - ../kafka-volumes/server-2:/bitnami/kafka
+    extends:
+      file: common-config.yml
+      service: kafka-config-service
+
+  kafka-3:
+    image: "bitnami/kafka:3.3.2"
+    container_name: kafka-3
+    environment:
+      - KAFKA_CFG_NODE_ID=3
+      # Listeners
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9192,CONTROLLER://:9094,EXTERNAL://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-3:9192,EXTERNAL://:9093
+    ports:
+      - "9093:9093"
+    volumes:
+      - ../kafka-volumes/server-3:/bitnami/kafka
+    extends:
+      file: common-config.yml
+      service: kafka-config-service
+
+networks:
+  sagaNetwork:
+    driver: "bridge"
